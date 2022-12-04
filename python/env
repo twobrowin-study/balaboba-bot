@@ -1,0 +1,14 @@
+BOT_TOKEN=''
+
+SHEETS_ACC_JSON=''
+
+SHEETS_NAME='Таблица адвент календаря ночного петушка'
+
+SHEET_TIMING='Время'
+SHEET_GROUPS='Группы'
+SHEET_PIVOT='Уже разосланные сообщения'
+SHEET_PHRASES='Фразы для поиска'
+SHEET_MAIN_TEXT='Основной текст'
+SHEET_PICTURES='Картинки'
+
+TIMING_UPDATE_TIME='10'
