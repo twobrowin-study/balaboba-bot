@@ -7,7 +7,7 @@
     - name: Run bot docker container
       docker_container:
         name: balaboba
-        image: twobrowin/balaboba:1.0
+        image: twobrowin/balaboba:1.1
         state: started
         detach: yes
         restart: yes
@@ -27,4 +27,4 @@
           SHEET_MAIN_TEXT: "Основной текст"
           SHEET_PICTURES:  "Картинки"
 
-          TIMING_UPDATE_TIME: "86400"
+          TIMING_UPDATE_TIME: "60"

@@ -2,4 +2,3 @@ pyTelegramBotAPI
 pandas
 gspread
 schedule
-balaboba

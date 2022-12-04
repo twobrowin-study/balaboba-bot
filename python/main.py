@@ -1,5 +1,4 @@
 from telebot import TeleBot
-from balaboba import Balaboba
 
 import sys
 
@@ -25,6 +24,19 @@ from datetime import datetime
 
 Bot = TeleBot(BotToken, parse_mode='Markdown')
 
+import json
+import urllib.request
+
+headers = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/605.1.15 '
+                  '(KHTML, like Gecko) Version/14.1.1 Safari/605.1.15',
+    'Origin': 'https://yandex.ru',
+    'Referer': 'https://yandex.ru/',
+}
+
+API_URL = 'https://zeapi.yandex.net/lab/api/yalm/text3'
+
 def main_job():
     Log.info("Starting main job")
     
@@ -32,7 +44,12 @@ def main_job():
     response = ''
     already_sent = AlreadySentClass(SheetPivot, 'alreadysent')
     while response == '' or already_sent.check_if_already_sent(response):
-        response = Balaboba().balaboba(phrase, text_type=phrase_type)
+        payload = {"query": phrase, "intro": phrase_type, "filter": 1}
+        params = json.dumps(payload).encode('utf8')
+        req = urllib.request.Request(API_URL, data=params, headers=headers)
+        response_json = urllib.request.urlopen(req).read().decode('utf8')
+        response_dict = json.loads(response_json)
+        response = response_dict["query"] + response_dict["text"]
     already_sent.write_text(response)
 
     date_until = datetime.strptime(Timing.get_until_date(), "%Y-%m-%d %H:%M").date()
